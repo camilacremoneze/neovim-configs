@@ -8,8 +8,10 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     -- Essentials
     "nvim-lua/plenary.nvim",
-    "folke/which-key.nvim",
-    "nvim-tree/nvim-tree.lua",
+
+    { "folke/which-key.nvim",   config = true },
+    { "nvim-tree/nvim-tree.lua", config = true },
+
     "nvim-telescope/telescope.nvim",
 
     -- LSP Logic
@@ -21,7 +23,6 @@ require("lazy").setup({
 
     -- AI
     "github/copilot.vim",
-    -- require("plugins.opencode"),
 
     {
         "catppuccin/nvim",
@@ -30,11 +31,8 @@ require("lazy").setup({
         config = function()
             require("catppuccin").setup({
                 flavour = "frappe",
+                auto_integrations = true,
                 integrations = {
-                    telescope = { enabled = true },
-                    mason = true,
-                    nvimtree = true,
-                    which_key = true,
                     native_lsp = {
                         enabled = true,
                         underlines = {
@@ -54,7 +52,6 @@ require("lazy").setup({
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         config = function()
-            -- This 'pcall' (protected call) prevents the crash if files aren't found yet
             local status_ok, configs = pcall(require, "nvim-treesitter.configs")
             if not status_ok then return end
 
@@ -63,7 +60,6 @@ require("lazy").setup({
                 auto_install = true,
                 highlight = {
                     enable = true,
-                    -- Setting this to false prevents conflict with standard Vim regex
                     additional_vim_regex_highlighting = false,
                 },
                 indent = { enable = true },
@@ -71,6 +67,3 @@ require("lazy").setup({
         end,
     },
 })
-
-require("which-key").setup()
-require("nvim-tree").setup()
