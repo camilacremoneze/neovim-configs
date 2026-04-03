@@ -9,7 +9,7 @@ require("lazy").setup({
     -- Essentials
     "nvim-lua/plenary.nvim",
 
-    { "folke/which-key.nvim",   config = true },
+    { "folke/which-key.nvim",    config = true },
     { "nvim-tree/nvim-tree.lua", config = true },
 
     "nvim-telescope/telescope.nvim",

@@ -29,15 +29,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local opts = function(desc) return { silent = true, buffer = bufnr, desc = desc } end
         local m = vim.keymap.set
 
-        m("n", "gD",          vim.lsp.buf.declaration,                              opts("Go to Declaration"))
-        m("n", "gd",          vim.lsp.buf.definition,                               opts("Go to Definition"))
-        m("n", "K",           vim.lsp.buf.hover,                                    opts("Hover Docs"))
-        m("n", "gI",          vim.lsp.buf.implementation,                           opts("Go to Implementation"))
-        m("n", "gr",          vim.lsp.buf.references,                               opts("References"))
-        m("n", "gl",          vim.diagnostic.open_float,                            opts("Line Diagnostics"))
-        m("n", "<leader>la",  vim.lsp.buf.code_action,                              opts("Code Action"))
-        m("n", "<leader>lr",  vim.lsp.buf.rename,                                   opts("Rename"))
-        m("n", "<leader>lf",  function() vim.lsp.buf.format({ async = true }) end,  opts("Format"))
+        m("n", "gD", vim.lsp.buf.declaration, opts("Go to Declaration"))
+        m("n", "gd", vim.lsp.buf.definition, opts("Go to Definition"))
+        m("n", "K", vim.lsp.buf.hover, opts("Hover Docs"))
+        m("n", "gI", vim.lsp.buf.implementation, opts("Go to Implementation"))
+        m("n", "gr", vim.lsp.buf.references, opts("References"))
+        m("n", "gl", vim.diagnostic.open_float, opts("Line Diagnostics"))
+        m("n", "<leader>la", vim.lsp.buf.code_action, opts("Code Action"))
+        m("n", "<leader>lr", vim.lsp.buf.rename, opts("Rename"))
+        m("n", "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, opts("Format"))
     end,
 })
 
@@ -45,8 +45,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- 2. NATIVE LSP ENABLE (The 0.12 Way)
 -- ========================================================================== --
 if vim.lsp.config then
-    vim.lsp.enable("lua_ls",  { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
-    vim.lsp.enable("gopls",   { settings = { gopls = { gofumpt = true } } })
+    vim.lsp.enable("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
+    vim.lsp.enable("gopls", { settings = { gopls = { gofumpt = true } } })
     vim.lsp.enable("pyright")
     vim.lsp.enable("terraformls")
 
