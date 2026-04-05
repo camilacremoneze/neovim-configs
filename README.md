@@ -1,6 +1,6 @@
 # Neovim Config
 
-A minimal, modern Neovim configuration built around native LSP (Neovim 0.12+ API), [lazy.nvim](https://github.com/folke/lazy.nvim), and [Mason](https://github.com/williamboman/mason.nvim).
+A minimal, modern Neovim configuration built around native LSP (Neovim 0.12+ API), [lazy.nvim](https://github.com/folke/lazy.nvim), [Mason](https://github.com/williamboman/mason.nvim), and [blink.cmp](https://github.com/saghen/blink.cmp) for autocompletion.
 
 ## Structure
 
@@ -25,6 +25,8 @@ A minimal, modern Neovim configuration built around native LSP (Neovim 0.12+ API
 | [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) | LSP client configuration |
 | [mason.nvim](https://github.com/williamboman/mason.nvim) | LSP server installer |
 | [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim) | Bridge between Mason and lspconfig |
+| [blink.cmp](https://github.com/saghen/blink.cmp) | Autocompletion engine |
+| [friendly-snippets](https://github.com/rafamadriz/friendly-snippets) | Snippet collection for blink.cmp |
 | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Syntax parsing & highlighting |
 | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Fuzzy finder |
 | [nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua) | File explorer |
@@ -107,6 +109,35 @@ Two steps fire synchronously before every save:
 2. **Format** — `vim.lsp.buf.format({ async = false, timeout_ms = 500 })`.
 
 Cursor position is saved and restored around the whole sequence so formatting never moves the viewport.
+
+## Completion
+
+Autocompletion is powered by [blink.cmp](https://github.com/saghen/blink.cmp), a fast Rust-based completion engine.
+
+### Sources
+
+| Source | Description |
+|---|---|
+| `lsp` | Completions from attached LSP servers |
+| `path` | File system path completions |
+| `snippets` | Snippet items from `friendly-snippets` |
+| `buffer` | Words from open buffers |
+
+### Features
+
+- **Signature help** — function argument hints appear automatically while typing
+- **Auto documentation** — docs popup opens 200 ms after hovering a completion item
+- **Treesitter-enhanced menu** — completion menu uses Treesitter highlighting for LSP items
+- **Enhanced LSP capabilities** — `blink.cmp` capabilities are broadcast to all servers via `vim.lsp.config("*", ...)` so servers know the client supports completion, snippets, and more
+
+### Completion Keymaps
+
+| Key | Action |
+|---|---|
+| `<Tab>` / `<S-Tab>` | Select next / previous item |
+| `<CR>` | Confirm selected item |
+| `<C-space>` | Manually trigger completion |
+| `<C-e>` | Close completion menu |
 
 ## Keymaps
 
