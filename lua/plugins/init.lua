@@ -14,10 +14,36 @@ require("lazy").setup({
 
     "nvim-telescope/telescope.nvim",
 
+    -- Completion
+    {
+        "saghen/blink.cmp",
+        version = "*",
+        dependencies = { "rafamadriz/friendly-snippets" },
+        opts = {
+            keymap = { preset = "default" },
+            appearance = {
+                use_nvim_cmp_as_default = false,
+                nerd_font_variant = "mono",
+            },
+            sources = {
+                default = { "lsp", "path", "snippets", "buffer" },
+            },
+            completion = {
+                documentation = { auto_show = true, auto_show_delay_ms = 200 },
+                menu = { draw = { treesitter = { "lsp" } } },
+            },
+            signature = { enabled = true },
+        },
+    },
+
     -- LSP Logic
     {
         "neovim/nvim-lspconfig",
-        dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
+        dependencies = {
+            "williamboman/mason.nvim",
+            "williamboman/mason-lspconfig.nvim",
+            "saghen/blink.cmp",
+        },
         config = function() require("plugins.lsp") end
     },
 

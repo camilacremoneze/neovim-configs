@@ -1,5 +1,17 @@
 -- lua/plugins/lsp.lua
 
+-- ========================================================================== --
+-- 0. BLINK.CMP CAPABILITIES (must run before any server is started)
+-- ========================================================================== --
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+local ok, blink = pcall(require, "blink.cmp")
+if ok then
+    capabilities = blink.get_lsp_capabilities(capabilities)
+end
+
+-- Broadcast enhanced capabilities to every server via the global config wildcard
+vim.lsp.config("*", { capabilities = capabilities })
+
 require("mason").setup()
 require("mason-lspconfig").setup({
     ensure_installed = {
